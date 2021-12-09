@@ -1,0 +1,12 @@
+{
+  "name": "kotlinjs-tailwindcss-2",
+  "version": "1.0.0",
+  "dependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss-import": "^14.0.2"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.4",
+    "tailwindcss": "^2.2.19"
+  }
+}
