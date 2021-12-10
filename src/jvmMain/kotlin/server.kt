@@ -1,13 +1,10 @@
-import io.ktor.application.call
-import io.ktor.html.respondHtml
-import io.ktor.http.HttpStatusCode
-import io.ktor.routing.get
-import io.ktor.routing.routing
+import io.ktor.application.*
+import io.ktor.features.*
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.jetty.Jetty
-import io.ktor.http.content.resources
-import io.ktor.http.content.static
+import io.ktor.serialization.*
 import kotlinx.html.*
+import kotlinx.serialization.json.Json
 
 fun test(){
 
@@ -32,14 +29,17 @@ fun main() {
     embeddedServer(Jetty,
         port = 8080,
         host = "0.0.0.0",
-        watchPaths = listOf("classes", "resources")) {
-        routing {
-            get("/") {
-                call.respondHtml(HttpStatusCode.OK, HTML::index)
-            }
-            static("/static") {
-                resources()
-            }
+        watchPaths = listOf("classes", "resources")
+    ) {
+        setupDatabase()
+        addAppRoute()
+        addUserRoute()
+        install(ContentNegotiation){
+            json(Json {
+                prettyPrint = true
+                isLenient = true
+            })
         }
-    }.start(wait = true)
+    }
+    .start(wait = true)
 }

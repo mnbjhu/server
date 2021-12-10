@@ -64,13 +64,15 @@ kotlin {
                 implementation("io.ktor:ktor-html-builder:$ktorVersion")
                 //implementation("io.ktor:ktor-auth:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
-                //implementation("org.slf4j:slf4j-api:$slf4jVersion")
-                //runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
+                implementation("org.slf4j:slf4j-api:$slf4jVersion")
+                runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
                 implementation("io.ktor:ktor-serialization:$ktorVersion")
                 implementation("io.ktor:ktor-websockets:$ktorVersion")
-                //implementation("org.jetbrains.exposed:exposed-core:0.36.1")
-                //implementation("org.jetbrains.exposed:exposed-jdbc:0.36.1")
-                //implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+                implementation("io.ktor:ktor-server-core:$ktorVersion")
+                implementation("org.jetbrains.exposed:exposed-core:0.36.1")
+                implementation("org.jetbrains.exposed:exposed-jdbc:0.36.1")
+                implementation("mysql:mysql-connector-java:8.0.26")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
             }
         }
         val jvmTest by getting
@@ -136,6 +138,9 @@ val copyPostcssConfig = tasks.register<Copy>("copyPostcssConfig") {
 tasks.named("processResources") {
     dependsOn(copyTailwindConfig)
     dependsOn(copyPostcssConfig)
+}
+dependencies {
+    implementation("io.ktor:ktor:1.6.6")
 }
 tasks.withType(KotlinWebpack::class.java).forEach { t ->
     t.inputs.files(fileTree("src/jsMain/resources"))
