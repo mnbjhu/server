@@ -57,6 +57,11 @@ kotlin {
         }
     }
     sourceSets {
+        val commonMain by getting{
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+            }
+        }
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
@@ -72,7 +77,7 @@ kotlin {
                 implementation("org.jetbrains.exposed:exposed-core:0.36.1")
                 implementation("org.jetbrains.exposed:exposed-jdbc:0.36.1")
                 implementation("mysql:mysql-connector-java:8.0.26")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+
             }
         }
         val jvmTest by getting

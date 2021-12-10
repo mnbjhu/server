@@ -15,14 +15,7 @@ object Users: Table() {
     val email =  varchar("email", 128)
     override val primaryKey = PrimaryKey(id)
 }
-@Serializable
-data class User(
-    val id: Int,
-    val username: String,
-    val firstName: String,
-    val secondName: String,
-    val email: String
-)
+
 fun getUserById(id: Int): User = transaction {
     val query = Users
         .select { Users.id eq id }
