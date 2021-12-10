@@ -50,6 +50,7 @@ fun Application.addUserRoute(){
         get("/api/test"){
             call.respond(HttpStatusCode.OK, "Test")
         }
+
         get("/api/users/{user}") {
             val param = call.parameters["user"]
             try {

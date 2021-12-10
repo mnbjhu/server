@@ -27,6 +27,4 @@ fun getUserById(id: Int): User = transaction {
         query[Users.last_name],
         query[Users.email]
     )
-
-
 }

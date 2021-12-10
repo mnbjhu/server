@@ -42,11 +42,9 @@ kotlin {
         binaries.executable()
 
         browser {
-
             commonWebpackConfig {
                 cssSupport.enabled = true
             }
-
             testTask {
                 testLogging.showStandardStreams = true
                 useKarma {
@@ -62,20 +60,27 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
             }
         }
+
         val jvmMain by getting {
             dependencies {
-                implementation(compose.desktop.currentOs)
-                implementation("io.ktor:ktor-server-jetty:$ktorVersion")
-                implementation("io.ktor:ktor-html-builder:$ktorVersion")
-                //implementation("io.ktor:ktor-auth:$ktorVersion")
+
+                //implementation(compose.desktop.currentOs)
+
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
+
                 implementation("org.slf4j:slf4j-api:$slf4jVersion")
                 runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
+
+                implementation("io.ktor:ktor-server-jetty:$ktorVersion")
+                implementation("io.ktor:ktor-html-builder:$ktorVersion")
                 implementation("io.ktor:ktor-serialization:$ktorVersion")
                 implementation("io.ktor:ktor-websockets:$ktorVersion")
                 implementation("io.ktor:ktor-server-core:$ktorVersion")
+                //implementation("io.ktor:ktor-auth:$ktorVersion")
+
                 implementation("org.jetbrains.exposed:exposed-core:0.36.1")
                 implementation("org.jetbrains.exposed:exposed-jdbc:0.36.1")
+
                 implementation("mysql:mysql-connector-java:8.0.26")
 
             }
@@ -85,8 +90,12 @@ kotlin {
             dependencies {
                 implementation(compose.web.core)
                 implementation(compose.runtime)
+
                 implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.256-kotlin-1.5.31")
+
                 implementation(npm("postcss", postcssVersion))
                 implementation(npm("postcss-loader", postcssLoaderVersion)) // 5.0.0 seems not to work
                 implementation(npm("autoprefixer", autoprefixerVersion))
