@@ -1,6 +1,7 @@
 import Models.Users
 import Models.getUserById
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.html.*
 import io.ktor.http.*
@@ -22,8 +23,6 @@ fun setupDatabase(){
     transaction {
         SchemaUtils.create(Users)
     }
-
-
 }
 fun Application.addAppRoute(){
     routing {
@@ -47,10 +46,11 @@ fun Application.addUserRoute(){
             catch (e: Exception){ call.respond(HttpStatusCode.OK, "${e.stackTrace.joinToString("\n")}") }
 
         }
-        get("/api/test"){
-            call.respond(HttpStatusCode.OK, "Test")
+        authenticate {
+            get("/api/test") {
+                call.respond(HttpStatusCode.OK, "Test2")
+            }
         }
-
         get("/api/users/{user}") {
             val param = call.parameters["user"]
             try {

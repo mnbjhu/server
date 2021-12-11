@@ -64,7 +64,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
 
-                //implementation(compose.desktop.currentOs)
+                implementation(compose.desktop.currentOs)
 
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
 
@@ -76,7 +76,7 @@ kotlin {
                 implementation("io.ktor:ktor-serialization:$ktorVersion")
                 implementation("io.ktor:ktor-websockets:$ktorVersion")
                 implementation("io.ktor:ktor-server-core:$ktorVersion")
-                //implementation("io.ktor:ktor-auth:$ktorVersion")
+                implementation("io.ktor:ktor-auth:$ktorVersion")
 
                 implementation("org.jetbrains.exposed:exposed-core:0.36.1")
                 implementation("org.jetbrains.exposed:exposed-jdbc:0.36.1")
@@ -114,6 +114,7 @@ kotlin {
 
 application {
     mainClass.set("ServerKt")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
 }
 
 tasks.getByName<KotlinWebpack>("jsBrowserProductionWebpack") {

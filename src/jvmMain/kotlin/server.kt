@@ -1,3 +1,5 @@
+
+import Models.addNewAuth
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.server.engine.embeddedServer
@@ -15,11 +17,11 @@ fun HTML.index() {
     }
     
     body {
-
+        div { id = "root2" }/*
         div {
 
             id = "root"
-        }
+        }*/
         script(src = "/static/js.js") {}
     }
 
@@ -32,6 +34,7 @@ fun main() {
         watchPaths = listOf("classes", "resources")
     ) {
         setupDatabase()
+        addNewAuth()
         addAppRoute()
         addUserRoute()
         install(ContentNegotiation){

@@ -1,7 +1,5 @@
 package Models
 
-
-import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
