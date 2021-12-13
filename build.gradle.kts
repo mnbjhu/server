@@ -1,6 +1,17 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.compose.compose
 
+// JVM
+val ktorVersion: String by project
+val kotlinxHtmlVersion: String by project
+val slf4jVersion: String by project
+
+// npm
+val postcssVersion: String by project
+val postcssLoaderVersion: String by project
+val autoprefixerVersion: String by project
+val tailwindcssVersion: String by project
+
 
 plugins {
     kotlin("multiplatform") version "1.5.31"
@@ -19,16 +30,7 @@ repositories {
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }}
 
-// JVM
-val ktorVersion: String by project
-val kotlinxHtmlVersion: String by project
-val slf4jVersion: String by project
 
-// npm
-val postcssVersion: String by project
-val postcssLoaderVersion: String by project
-val autoprefixerVersion: String by project
-val tailwindcssVersion: String by project
 
 kotlin {
 
@@ -103,6 +105,7 @@ kotlin {
                 //implementation(npm("@tailwindcss/jit", "0.1.18"))
 
                 implementation("app.softwork:routing-compose:0.1.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.31")
             }
 
         }

@@ -17,7 +17,7 @@ fun HTML.index() {
     }
     
     body {
-        div { id = "root2" }/*
+        div { id = "root" }/*
         div {
 
             id = "root"
@@ -34,9 +34,9 @@ fun main() {
         watchPaths = listOf("classes", "resources")
     ) {
         setupDatabase()
-        addNewAuth()
+        //addNewAuth()
         addAppRoute()
-        addUserRoute()
+        //addUserRoute()
         install(ContentNegotiation){
             json(Json {
                 prettyPrint = true

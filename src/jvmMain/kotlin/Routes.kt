@@ -26,7 +26,7 @@ fun setupDatabase(){
 }
 fun Application.addAppRoute(){
     routing {
-        get("/") {
+        get("/{...}") {
             call.respondHtml(HttpStatusCode.OK, HTML::index)
         }
         static("/static") {

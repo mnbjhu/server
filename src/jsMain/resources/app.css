@@ -25,14 +25,7 @@ a{
     user-select: none;
 
 }
-.items { position: relative; }
-.items li {
-    position: absolute; top: auto; left: auto;
-    transition: all 0.2s ease-out;
-}
-.items li:nth-child(1)  { transform: translate3d(, 0%, ); }
-.items li:nth-child(2)  { transform: translate3d(, 100%, ); }
-.items li:nth-child(3)  { transform: translate3d(, 200%, ); }
+
 @layer components{
     .sideBar{
         @apply fixed top-0 left-0 h-screen w-48 m-0 flex flex-col bg-gray-900 text-white shadow-lg text-4xl font-bold text-center font-sans
