@@ -50,5 +50,5 @@ fun UsernameField(){
 }
 @Composable
 fun PasswordField(){
-    Input(InputType.Text)
+    Input(InputType.Password)
 }

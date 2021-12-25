@@ -8,20 +8,14 @@ import io.ktor.serialization.*
 import kotlinx.html.*
 import kotlinx.serialization.json.Json
 
-fun test(){
 
-}
 fun HTML.index() {
     head {
         title("Hello from Ktor!")
     }
     
     body {
-        div { id = "root2" }/*
-        div {
-
-            id = "root"
-        }*/
+        div { id = "root" }
         script(src = "/static/js.js") {}
     }
 
@@ -38,10 +32,12 @@ fun main() {
         addAppRoute()
         addUserRoute()
         install(ContentNegotiation){
-            json(Json {
-                prettyPrint = true
-                isLenient = true
-            })
+            json(
+                Json {
+                    prettyPrint = true
+                    isLenient = true
+                }
+            )
         }
     }
     .start(wait = true)

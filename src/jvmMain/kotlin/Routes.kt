@@ -43,7 +43,7 @@ fun Application.addUserRoute(){
                 }
                 call.respond(HttpStatusCode.OK, "$x")
             }
-            catch (e: Exception){ call.respond(HttpStatusCode.OK, "${e.stackTrace.joinToString("\n")}") }
+            catch (e: Exception){ call.respond(HttpStatusCode.OK, e.stackTrace.joinToString("\n")) }
 
         }
         authenticate {

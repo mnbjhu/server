@@ -5,7 +5,7 @@ import org.jetbrains.compose.compose
 plugins {
     kotlin("multiplatform") version "1.5.31"
     id("org.jetbrains.compose") version "1.0.0"
-    kotlin("plugin.serialization") version "1.5.31"
+    //kotlin("plugin.serialization") version "1.5.31"
     application
 }
 
@@ -100,7 +100,8 @@ kotlin {
                 implementation(npm("postcss-loader", postcssLoaderVersion)) // 5.0.0 seems not to work
                 implementation(npm("autoprefixer", autoprefixerVersion))
                 implementation(npm("tailwindcss", tailwindcssVersion))
-                //implementation(npm("@tailwindcss/jit", "0.1.18"))
+
+                implementation("app.softwork:routing-compose:0.1.3")
             }
 
         }
