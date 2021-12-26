@@ -1,3 +1,4 @@
+import Models.AuthSession
 import Models.Users
 import Models.getUserById
 import io.ktor.application.*
@@ -22,12 +23,19 @@ fun setupDatabase(){
     )
     transaction {
         SchemaUtils.create(Users)
+        SchemaUtils.create(AuthSession)
     }
 }
 fun Application.addAppRoute(){
     routing {
-        get("/") {
+        get("/app/login") {
             call.respondHtml(HttpStatusCode.OK, HTML::index)
+        }
+        authenticate{
+            get("/app/private") {
+                call.respondHtml(HttpStatusCode.OK, HTML::index)
+                log.info("A user successfully accessed app/private")
+            }
         }
         static("/static") {
             resources()
@@ -45,11 +53,6 @@ fun Application.addUserRoute(){
             }
             catch (e: Exception){ call.respond(HttpStatusCode.OK, e.stackTrace.joinToString("\n")) }
 
-        }
-        authenticate {
-            get("/api/test") {
-                call.respond(HttpStatusCode.OK, "Test2")
-            }
         }
         get("/api/users/{user}") {
             val param = call.parameters["user"]

@@ -17,21 +17,13 @@ fun main() {
 }
 */
 fun main() {
-
-    //kotlinext.js.require("./app.css")
+    kotlinext.js.require("./app.css")
     renderComposable(rootElementId = "root"){
-        HashRouter(initRoute = "/") { // or BrowserRouter(initRoute = "/users") {
-            route("users") {
-                int { userID ->
-                    Text("User with $userID")
-                }
-                noMatch {
-                    Text("User list")
-                }
+        BrowserRouter(initRoute = "/") { // or BrowserRouter(initRoute = "/users") {
+            route("app") {
+                addRoutes()
             }
-            noMatch {
-                Text("Hello World")
-            }
+
         }
     }
 }

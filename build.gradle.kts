@@ -20,9 +20,10 @@ repositories {
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }}
 
 // JVM
-val ktorVersion: String by project
+val ktor_version: String by project
 val kotlinxHtmlVersion: String by project
 val slf4jVersion: String by project
+val logback_version: String by project
 
 // npm
 val postcssVersion: String by project
@@ -71,12 +72,15 @@ kotlin {
                 implementation("org.slf4j:slf4j-api:$slf4jVersion")
                 runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
 
-                implementation("io.ktor:ktor-server-jetty:$ktorVersion")
-                implementation("io.ktor:ktor-html-builder:$ktorVersion")
-                implementation("io.ktor:ktor-serialization:$ktorVersion")
-                implementation("io.ktor:ktor-websockets:$ktorVersion")
-                implementation("io.ktor:ktor-server-core:$ktorVersion")
-                implementation("io.ktor:ktor-auth:$ktorVersion")
+                implementation("io.ktor:ktor-server-jetty:$ktor_version")
+                implementation("io.ktor:ktor-html-builder:$ktor_version")
+                implementation("io.ktor:ktor-serialization:$ktor_version")
+                implementation("io.ktor:ktor-websockets:$ktor_version")
+                implementation("io.ktor:ktor-server-core:$ktor_version")
+                implementation("io.ktor:ktor-auth:$ktor_version")
+                implementation("io.ktor:ktor-server-sessions:$ktor_version")
+                implementation("ch.qos.logback:logback-classic:$logback_version")
+
 
                 implementation("org.jetbrains.exposed:exposed-core:0.36.1")
                 implementation("org.jetbrains.exposed:exposed-jdbc:0.36.1")
@@ -92,7 +96,7 @@ kotlin {
                 implementation(compose.runtime)
 
                 implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-core:$ktor_version")
 
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.256-kotlin-1.5.31")
 

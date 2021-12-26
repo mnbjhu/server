@@ -1,7 +1,11 @@
 
-import Models.addNewAuth
+
+import Models.addAuth
+import Models.addSessionAuth
 import io.ktor.application.*
 import io.ktor.features.*
+import io.ktor.http.*
+import io.ktor.response.*
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.jetty.Jetty
 import io.ktor.serialization.*
@@ -11,7 +15,7 @@ import kotlinx.serialization.json.Json
 
 fun HTML.index() {
     head {
-        title("Hello from Ktor!")
+        title("That's the pizza!")
     }
     
     body {
@@ -28,9 +32,6 @@ fun main() {
         watchPaths = listOf("classes", "resources")
     ) {
         setupDatabase()
-        addNewAuth()
-        addAppRoute()
-        addUserRoute()
         install(ContentNegotiation){
             json(
                 Json {
@@ -39,6 +40,18 @@ fun main() {
                 }
             )
         }
+        install(StatusPages){
+            exception<Throwable> {
+                call.respondText(
+                    it.localizedMessage,
+                    ContentType.Text.Plain,
+                    HttpStatusCode.InternalServerError
+                )
+            }
+        }
+        addSessionAuth()
+        addAppRoute()
+        addUserRoute()
     }
     .start(wait = true)
 }
