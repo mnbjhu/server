@@ -41,7 +41,6 @@ kotlin {
     }
     js(IR) {
         binaries.executable()
-
         browser {
             commonWebpackConfig {
                 cssSupport.enabled = true
@@ -97,6 +96,7 @@ kotlin {
 
                 implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
                 implementation("io.ktor:ktor-client-core:$ktor_version")
+                implementation("io.ktor:ktor-client-websockets:$ktor_version")
 
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.256-kotlin-1.5.31")
 
@@ -104,6 +104,7 @@ kotlin {
                 implementation(npm("postcss-loader", postcssLoaderVersion)) // 5.0.0 seems not to work
                 implementation(npm("autoprefixer", autoprefixerVersion))
                 implementation(npm("tailwindcss", tailwindcssVersion))
+
 
                 implementation("app.softwork:routing-compose:0.1.3")
             }
@@ -161,6 +162,7 @@ tasks.named("processResources") {
 }
 dependencies {
     implementation("io.ktor:ktor:1.6.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.8")
 }
 tasks.withType(KotlinWebpack::class.java).forEach { t ->
     t.inputs.files(fileTree("src/jsMain/resources"))

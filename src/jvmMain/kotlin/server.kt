@@ -9,6 +9,7 @@ import io.ktor.response.*
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.jetty.Jetty
 import io.ktor.serialization.*
+import io.ktor.websocket.*
 import kotlinx.html.*
 import kotlinx.serialization.json.Json
 
@@ -40,6 +41,7 @@ fun main() {
                 }
             )
         }
+        install(WebSockets)
         install(StatusPages){
             exception<Throwable> {
                 call.respondText(

@@ -6,9 +6,11 @@ import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.html.*
 import io.ktor.http.*
+import io.ktor.http.cio.websocket.*
 import io.ktor.http.content.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import io.ktor.websocket.*
 import kotlinx.html.HTML
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -29,6 +31,9 @@ fun setupDatabase(){
 fun Application.addAppRoute(){
     routing {
         get("/app/login") {
+            call.respondHtml(HttpStatusCode.OK, HTML::index)
+        }
+        get("/app/echo") {
             call.respondHtml(HttpStatusCode.OK, HTML::index)
         }
         authenticate{
@@ -78,6 +83,21 @@ fun Application.addUserRoute(){
                 }
             }
         }
-
+        webSocket("/api/echo") {
+            send("Please enter your name")
+            for (frame in incoming) {
+                when (frame) {
+                    is Frame.Text -> {
+                        log.info("Received msg from client")
+                        val receivedText = frame.readText()
+                        if (receivedText.equals("bye", ignoreCase = true)) {
+                            close(CloseReason(CloseReason.Codes.NORMAL, "Client said BYE"))
+                        } else {
+                            send(Frame.Text("Hi, $receivedText!"))
+                        }
+                    }
+                }
+            }
+        }
     }
 }
