@@ -9,7 +9,18 @@ import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun GameHome(){
-    Div { Text("Enter lobby code here:") }
+    FormDiv {
+        Text("Hello, World!")
+    }
+}
+@Composable
+fun FormDiv(content: @Composable()()->Unit){
+    Div( attrs = { classes("formDiv") } ) {
+        content()
+    }
+}
+/*
+Div { Text("Enter lobby code here:") }
     Div {
         Input(InputType.Text)
     }
@@ -19,8 +30,8 @@ fun GameHome(){
         }
     }
     Div {
-        Button(attrs = { classes() }) {
+        Button(attrs = { classes("button_style") }) {
             Text("Create New Lobby")
         }
     }
-}
+ */

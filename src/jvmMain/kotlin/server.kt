@@ -30,7 +30,10 @@ fun main() {
     embeddedServer(Jetty,
         port = 8080,
         host = "0.0.0.0",
-        watchPaths = listOf("classes", "resources")
+        watchPaths = listOf(
+            "classes",
+            "resources"
+        )
     ) {
         setupDatabase()
         install(ContentNegotiation){
