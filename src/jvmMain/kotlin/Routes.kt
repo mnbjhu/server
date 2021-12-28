@@ -42,6 +42,12 @@ fun Application.addAppRoute(){
                 log.info("A user successfully accessed app/private")
             }
         }
+        authenticate{
+            get("/app/game/home") {
+                call.respondHtml(HttpStatusCode.OK, HTML::index)
+                log.info("A user successfully accessed /app/game/home")
+            }
+        }
         static("/static") {
             resources()
         }

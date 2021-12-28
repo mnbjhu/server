@@ -1,4 +1,5 @@
 import Views.Echo
+import Views.GameHome
 import Views.LoginForm
 import androidx.compose.runtime.Composable
 import app.softwork.routingcompose.NavBuilder
@@ -9,6 +10,17 @@ fun NavBuilder.addRoutes(){
     addLoginRoute()
     addAuthenticatedPage()
     addEchoRoute()
+    addGameRoute()
+}
+
+@Composable
+fun NavBuilder.addGameRoute(){
+    route("game"){
+        route("home"){
+            GameHome()
+        }
+
+    }
 }
 
 @Composable
