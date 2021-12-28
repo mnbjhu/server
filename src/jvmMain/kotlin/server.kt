@@ -32,6 +32,7 @@ fun main() {
         host = "0.0.0.0",
         watchPaths = listOf(
             "classes",
+            "distributions",
             "resources"
         )
     ) {

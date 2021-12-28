@@ -15,8 +15,11 @@ fun GameHome(){
 }
 @Composable
 fun FormDiv(content: @Composable()()->Unit){
-    Div( attrs = { classes("formDiv") } ) {
-        content()
+    Div(attrs = { classes("screen") }) {
+        Text("Hello!")
+        Div( attrs = { classes("formDiv") } ) {
+            content()
+        }
     }
 }
 /*

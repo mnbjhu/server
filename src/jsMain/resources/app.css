@@ -65,10 +65,13 @@ a{
     .button_style{
         @apply relative
     }
+    .screen{
+        @apply w-max max-h-full
+    }
     .formDiv{
         @apply relative flex items-center
-        justify-center h-48 w-48 mt-2 mb-2 mx-auto
-        rounded-3xl
+        justify-center h-[32rem] w-72 mt-2 mb-2 mx-auto align-middle
+        rounded-3xl shadow-lg
         transition-all duration-200 ease-linear
     }
 }
