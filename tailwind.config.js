@@ -3,7 +3,7 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   enabled: true,
   mode: 'jit',
-  purge: ['./kotlin/**/*.{js,jsx,ts,tsx,vue}',],
+  content: ['./kotlin/**/*.{js,jsx,ts,tsx,html}',],
   darkMode: 'class', // class, 'media' or boolean
   theme: {
     extend: {

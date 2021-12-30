@@ -140,6 +140,7 @@ tasks.getByName<JavaExec>("run") {
     classpath(jvmJarTask)
 }
 
+
 // Suppresses a "without declaring an explicit or implicit dependency" warning
 tasks.getByName("startScripts").dependsOn("metadataJar")
 val copyTailwindConfig = tasks.register<Copy>("copyTailwindConfig") {
@@ -160,6 +161,7 @@ tasks.named("processResources") {
     dependsOn(copyTailwindConfig)
     dependsOn(copyPostcssConfig)
 }
+tasks.getByName("build").dependsOn("processResources")
 dependencies {
     implementation("io.ktor:ktor:1.6.6")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.8")

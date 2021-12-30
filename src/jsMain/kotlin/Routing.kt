@@ -1,5 +1,6 @@
 import Views.Echo
 import Views.GameHome
+import Views.HelloWorld
 import Views.LoginForm
 import androidx.compose.runtime.Composable
 import app.softwork.routingcompose.NavBuilder
