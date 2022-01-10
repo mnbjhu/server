@@ -1,26 +1,27 @@
 
-
-import Models.addAuth
-import Models.addSessionAuth
+import Models.addNewAuth
 import io.ktor.application.*
 import io.ktor.features.*
-import io.ktor.http.*
-import io.ktor.response.*
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.jetty.Jetty
 import io.ktor.serialization.*
-import io.ktor.websocket.*
 import kotlinx.html.*
 import kotlinx.serialization.json.Json
 
+fun test(){
 
+}
 fun HTML.index() {
     head {
-        title("That's the pizza!")
+        title("Hello from Ktor!")
     }
     
     body {
-        div { id = "root" }
+        div { id = "root" }/*
+        div {
+
+            id = "root"
+        }*/
         script(src = "/static/js.js") {}
     }
 
@@ -33,27 +34,15 @@ fun main() {
         watchPaths = listOf("classes", "resources")
     ) {
         setupDatabase()
-        install(ContentNegotiation){
-            json(
-                Json {
-                    prettyPrint = true
-                    isLenient = true
-                }
-            )
-        }
-        install(WebSockets)
-        install(StatusPages){
-            exception<Throwable> {
-                call.respondText(
-                    it.localizedMessage,
-                    ContentType.Text.Plain,
-                    HttpStatusCode.InternalServerError
-                )
-            }
-        }
-        addSessionAuth()
+        //addNewAuth()
         addAppRoute()
-        addUserRoute()
+        //addUserRoute()
+        install(ContentNegotiation){
+            json(Json {
+                prettyPrint = true
+                isLenient = true
+            })
+        }
     }
     .start(wait = true)
 }

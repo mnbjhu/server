@@ -1,11 +1,22 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.compose.compose
 
+// JVM
+val ktorVersion: String by project
+val kotlinxHtmlVersion: String by project
+val slf4jVersion: String by project
+
+// npm
+val postcssVersion: String by project
+val postcssLoaderVersion: String by project
+val autoprefixerVersion: String by project
+val tailwindcssVersion: String by project
+
 
 plugins {
     kotlin("multiplatform") version "1.5.31"
     id("org.jetbrains.compose") version "1.0.0"
-    //kotlin("plugin.serialization") version "1.5.31"
+    kotlin("plugin.serialization") version "1.5.31"
     application
 }
 
@@ -19,17 +30,7 @@ repositories {
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }}
 
-// JVM
-val ktor_version: String by project
-val kotlinxHtmlVersion: String by project
-val slf4jVersion: String by project
-val logback_version: String by project
 
-// npm
-val postcssVersion: String by project
-val postcssLoaderVersion: String by project
-val autoprefixerVersion: String by project
-val tailwindcssVersion: String by project
 
 kotlin {
 
@@ -41,6 +42,7 @@ kotlin {
     }
     js(IR) {
         binaries.executable()
+
         browser {
             commonWebpackConfig {
                 cssSupport.enabled = true
@@ -71,15 +73,12 @@ kotlin {
                 implementation("org.slf4j:slf4j-api:$slf4jVersion")
                 runtimeOnly("org.slf4j:slf4j-simple:$slf4jVersion")
 
-                implementation("io.ktor:ktor-server-jetty:$ktor_version")
-                implementation("io.ktor:ktor-html-builder:$ktor_version")
-                implementation("io.ktor:ktor-serialization:$ktor_version")
-                implementation("io.ktor:ktor-websockets:$ktor_version")
-                implementation("io.ktor:ktor-server-core:$ktor_version")
-                implementation("io.ktor:ktor-auth:$ktor_version")
-                implementation("io.ktor:ktor-server-sessions:$ktor_version")
-                implementation("ch.qos.logback:logback-classic:$logback_version")
-
+                implementation("io.ktor:ktor-server-jetty:$ktorVersion")
+                implementation("io.ktor:ktor-html-builder:$ktorVersion")
+                implementation("io.ktor:ktor-serialization:$ktorVersion")
+                implementation("io.ktor:ktor-websockets:$ktorVersion")
+                implementation("io.ktor:ktor-server-core:$ktorVersion")
+                implementation("io.ktor:ktor-auth:$ktorVersion")
 
                 implementation("org.jetbrains.exposed:exposed-core:0.36.1")
                 implementation("org.jetbrains.exposed:exposed-jdbc:0.36.1")
@@ -95,8 +94,7 @@ kotlin {
                 implementation(compose.runtime)
 
                 implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
-                implementation("io.ktor:ktor-client-core:$ktor_version")
-                implementation("io.ktor:ktor-client-websockets:$ktor_version")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
 
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.256-kotlin-1.5.31")
 
@@ -104,9 +102,10 @@ kotlin {
                 implementation(npm("postcss-loader", postcssLoaderVersion)) // 5.0.0 seems not to work
                 implementation(npm("autoprefixer", autoprefixerVersion))
                 implementation(npm("tailwindcss", tailwindcssVersion))
-
+                //implementation(npm("@tailwindcss/jit", "0.1.18"))
 
                 implementation("app.softwork:routing-compose:0.1.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.31")
             }
 
         }
@@ -140,7 +139,6 @@ tasks.getByName<JavaExec>("run") {
     classpath(jvmJarTask)
 }
 
-
 // Suppresses a "without declaring an explicit or implicit dependency" warning
 tasks.getByName("startScripts").dependsOn("metadataJar")
 val copyTailwindConfig = tasks.register<Copy>("copyTailwindConfig") {
@@ -161,10 +159,8 @@ tasks.named("processResources") {
     dependsOn(copyTailwindConfig)
     dependsOn(copyPostcssConfig)
 }
-tasks.getByName("build").dependsOn("processResources")
 dependencies {
     implementation("io.ktor:ktor:1.6.6")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.8")
 }
 tasks.withType(KotlinWebpack::class.java).forEach { t ->
     t.inputs.files(fileTree("src/jsMain/resources"))
