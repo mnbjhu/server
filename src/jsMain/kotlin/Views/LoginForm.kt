@@ -14,6 +14,7 @@ import androidx.compose.runtime.setValue
 fun LoginForm(){
     var username by mutableStateOf("")
     var password by mutableStateOf("")
+
     Div {
         Div {
             Input(InputType.Text, attrs = {
@@ -50,5 +51,5 @@ fun UsernameField(){
 }
 @Composable
 fun PasswordField(){
-    Input(InputType.Text)
+    Input(InputType.Password)
 }

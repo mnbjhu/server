@@ -16,7 +16,7 @@ data class UserSession(
     val roles: Set<String> = emptySet()
 ) : Principal
 
-fun Application.addNewAuth(){
+fun Application.addAuth(){
     install(Sessions) {
         cookie<UserSession>("ktor_session_cookie", SessionStorageMemory())
     }
@@ -25,29 +25,17 @@ fun Application.addNewAuth(){
             validate { session: UserSession ->
                 session
             }
-            challenge {
-                call.respondRedirect("/login")
-            }
         }
     }
+/*
     routing {
-        get("/login") { /* Show login page */ }
 
-        post("/login") {
-            val credentials = call.receive<Credentials>()
-            val count = transaction {
-                Users.select{ (Users.username eq credentials.username) and
-                        (Users.password eq credentials.password) }
-                    .count()
+            post("/api/login") {
+                val userName = call.principal<UserIdPrincipal>()?.name.toString()
+                call.sessions.set(UserSession(name = userName))
+                call.respondRedirect("/app/private")
             }
-            if (count > 0) {
-                // Store principal in session
-                call.sessions.set(UserSession(credentials.username))
-                call.respondRedirect("/")
-            } else {
-                // Stay on login page
-                call.respondRedirect("/login")
-            }
-        }
+
     }
+    */
 }

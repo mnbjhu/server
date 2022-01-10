@@ -13,29 +13,3 @@ fun main() {
     }
 
 }
-/*
-fun main() {
-    kotlinext.js.require("./app.css")
-    renderComposable(rootElementId = "root") {
-        Div{
-            LoginForm()
-        }
-    }
-
-}
- */
-/*
-HashRouter(initRoute = "/users") { // or BrowserRouter(initRoute = "/users") {
-            route("/users") {
-                int { userID ->
-                    Text("User with $userID")
-                }
-                noMatch {
-                    Text("User list")
-                }
-            }
-            noMatch {
-                Text("Hello World")
-            }
-        }
- */
