@@ -5,7 +5,7 @@ import org.jetbrains.compose.compose
 plugins {
     kotlin("multiplatform") version "1.5.31"
     id("org.jetbrains.compose") version "1.0.0"
-    //kotlin("plugin.serialization") version "1.5.31"
+    kotlin("plugin.serialization") version "1.5.31"
     application
 }
 
@@ -97,6 +97,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
                 implementation("io.ktor:ktor-client-core:$ktor_version")
                 implementation("io.ktor:ktor-client-websockets:$ktor_version")
+
 
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.256-kotlin-1.5.31")
 

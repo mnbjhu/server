@@ -1,6 +1,4 @@
-
-
-import Models.addAuth
+import Models.AuthSession
 import Models.addSessionAuth
 import io.ktor.application.*
 import io.ktor.features.*
@@ -12,7 +10,21 @@ import io.ktor.serialization.*
 import io.ktor.websocket.*
 import kotlinx.html.*
 import kotlinx.serialization.json.Json
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.transactions.transaction
 
+fun setupDatabase(){
+    Database.connect(
+        url = "jdbc:mysql://31.14.41.229:3306/dev",
+        driver = "com.mysql.jdbc.Driver",
+        user = "mnbjhu",
+        password = "password"
+    )
+    transaction {
+        SchemaUtils.create(AuthSession)
+    }
+}
 
 fun HTML.index() {
     head {
@@ -53,7 +65,6 @@ fun main() {
         }
         addSessionAuth()
         addAppRoute()
-        addUserRoute()
     }
     .start(wait = true)
 }

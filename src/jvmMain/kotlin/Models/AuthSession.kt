@@ -11,9 +11,10 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 
 object AuthSession: Table() {
-    val id = AuthSession.integer("id").autoIncrement()
-    val name = AuthSession.varchar("name", 80)
-    val password = AuthSession.varchar("password", 60)
+    val id = integer("id").autoIncrement()
+    val name = varchar("name", 80)
+    val password = varchar("password", 60)
+    val lobby = reference("lobby", Lobbies.id).nullable()
     override val primaryKey = PrimaryKey(id)
 }
 fun createNewSession() = transaction {
@@ -21,7 +22,8 @@ fun createNewSession() = transaction {
     val id = AuthSession.insert{
         it[name] = ""
         it[AuthSession.password] = password
-    } get AuthSession.id
+        it[lobby] = null
+    }[AuthSession.id]
     AuthSession.update(where = { AuthSession.id eq id }) {
         it[name] = "User $id"
     }

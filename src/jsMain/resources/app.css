@@ -9,42 +9,7 @@ body {
 @tailwind screens;
 @tailwind utilities;
 
-.App {
-    @apply text-green-500
-}
-
-
 @layer components{
-    .sideBar{
-        @apply fixed top-0 left-0 h-screen w-48 m-0 flex flex-col bg-gray-900 text-white shadow-lg text-4xl font-bold text-center font-sans
-        transition-all duration-200 ease-linear
-    }
-    .emptyItem{
-        @apply relative flex items-center
-        justify-center h-48 w-48 mt-2 mb-2 mx-auto
-    }
-    .sideBarIcon{
-        @apply relative flex items-center
-        justify-center h-48 w-48 mt-2 mb-2 mx-auto
-        bg-gray-800 text-green-500 rounded-xl
-        hover:bg-green-800 hover:text-white hover:rounded-3xl
-        transition-all duration-200 ease-linear
-    }
-    .body{
-        @apply fixed top-0 left-0 h-screen w-screen
-    }
-    .sideBarIconOff{
-        @apply relative flex items-center
-        justify-center h-48 w-48 mt-2 mb-2 mx-auto
-        bg-gray-800 text-green-500 rounded-xl
-        transition-all duration-200 ease-linear
-    }
-    .sideBarIconOn{
-        @apply relative flex items-center
-        justify-center h-48 w-48 mt-2 mb-2 mx-auto
-        bg-green-800 text-white rounded-3xl
-        transition-all duration-200 ease-linear
-    }
     .screenDiv{
         @apply flex items-center justify-center
         fixed top-0 left-0 h-screen w-screen
